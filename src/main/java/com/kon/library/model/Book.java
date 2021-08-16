@@ -26,4 +26,9 @@ public class Book {
     @JoinColumn(name = "AUTHOR_ID", nullable = false)
     private Author author;
 
+    public Book(String name, String description, Author author) {
+        this.name = name;
+        this.description = description;
+        this.author = author;
+    }
 }

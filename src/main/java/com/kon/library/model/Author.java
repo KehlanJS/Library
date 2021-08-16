@@ -25,17 +25,17 @@ public class Author {
     private String lastName;
 
     @Column(name = "BIRTHDATE", nullable = true)
+    @NotNull
     private Date birthDate;
 
     @OneToMany(mappedBy = "author")
     private Set<Book> books;
 
-    public Author(String name, String lastName) {
+    public Author(String name, String lastName, Date birthDate) {
         this.name = name;
         this.lastName = lastName;
+        this.birthDate = birthDate;
     }
 
-    public Author() {
-
-    }
+    public Author(){}
 }
