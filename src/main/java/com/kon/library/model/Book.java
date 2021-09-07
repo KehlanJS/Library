@@ -1,6 +1,7 @@
 package com.kon.library.model;
 
 import com.sun.istack.NotNull;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
 public class Book {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Column(name = "ID", unique = true)
     private Long id;
@@ -22,7 +23,8 @@ public class Book {
     @Column(name = "DESCRIPTION",nullable = false)
     private String description;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "AUTHOR_ID", nullable = false)
     private Author author;
 
@@ -30,5 +32,25 @@ public class Book {
         this.name = name;
         this.description = description;
         this.author = author;
+    }
+
+    public Book() {
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Author getAuthor() {
+        return author;
     }
 }

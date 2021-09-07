@@ -16,11 +16,16 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class BookController {
 
-    @Autowired
+
     BookService bookService;
+
+    @Autowired
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @PostMapping(value = "/add", consumes = APPLICATION_JSON_VALUE)
     public Book addBook(@RequestBody BookDto dto){
-        return bookService.addBook(new Book(dto.getName(), dto.getDescription(), dto.getAuthor()));
+        return bookService.addBook(dto);
     }
 }
