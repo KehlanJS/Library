@@ -32,8 +32,7 @@ public class AuthorServiceImpl implements AuthorService {
         return authorRepository.save(author);
     }
 
-    //TODO: sprawdzic czy da sie to zrobic ladniej niz ifem i nie uzywac trima,albo w przypadku gdy podzielony string nie zawiera imienia i nazwiska wyrzucic illegalArgumentEseption
-    public Author findAuthorByNameAndLastname(String author) throws IllegalArgumentException {
+    public Author findAuthorByNameAndLastName(String author) throws IllegalArgumentException {
         String[] authorData = author.split("[ ]+");
         if(authorData.length != 2){
             throw new IllegalArgumentException("Author's name not valid");

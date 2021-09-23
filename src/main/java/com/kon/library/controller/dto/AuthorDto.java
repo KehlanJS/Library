@@ -14,6 +14,12 @@ public class AuthorDto implements Serializable {
     public AuthorDto() {
     }
 
+    public AuthorDto(String name, String lastName, Date birthDate) {
+        this.name = name;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+    }
+
     private AuthorDto(Builder builder) {
         this.name = builder.getName();
         this.lastName = builder.getLastName();

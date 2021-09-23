@@ -33,7 +33,7 @@ public class BookServiceImpl implements BookService{
     public Book addBook(BookDto bookDto) {
         log.info("Dodaje ksiazke: {}", bookDto);
        try{
-           Author author = authorService.findAuthorByNameAndLastname(bookDto.getAuthor());
+           Author author = authorService.findAuthorByNameAndLastName(bookDto.getAuthor());
            System.out.println(author);
            return bookRepository.save(new Book(bookDto.getName(),bookDto.getDescription(), author));
        }catch(IllegalArgumentException e){
@@ -49,4 +49,16 @@ public class BookServiceImpl implements BookService{
                 .map(bookMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+
+    //TODO : testy Controller, baeldung rest api, i test do getBooks... addBook i getAllBooks
+    public List<BookDto> getBooksWhereNameContains(String name){
+        List<Book> books = bookRepository.getAllByNameContainingIgnoreCase(name);
+
+        return books.stream()
+                .map(bookMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+
 }

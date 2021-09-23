@@ -39,4 +39,14 @@ public class BookController {
 
         return new ResponseEntity<>(bookList, HttpStatus.OK);
     }
+
+    @ResponseBody
+    @GetMapping(value = "/{name}")
+    public ResponseEntity<List<BookDto>> getBooksLike(@PathVariable String name) {
+
+        final var bookList = bookService.getBooksWhereNameContains(name);
+
+        return new ResponseEntity<>(bookList, HttpStatus.OK);
+    }
+
 }

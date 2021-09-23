@@ -20,22 +20,22 @@ public class BookRepositoryTest {
     @Autowired
     BookRepository bookRepository;
 
+    @Autowired
+    AuthorRepository authorRepository;
+
     @Test
-    void findAllTest(){
-        Book book1 = new Book("adf", "adfad", new Author("asfas","adfdsfa", new Date()));
-        Book book2 = new Book("aaddf", "adfaadd", new Author("asfasdas","adfdasdsfa", new Date()));
+    void findAllTest() {
+        Author author = new Author("asfas", "adfdsfa", new Date());
+        Author author2 = new Author("asfasdas", "adfdasdsfa", new Date());
+        authorRepository.saveAll(List.of(author, author2));
 
-        bookRepository.save(book1);
-        bookRepository.save(book2);
-        List<Book> booksInRepo = bookRepository.findAll();
+        Book book1 = new Book("adf", "adfad", author);
+        Book book2 = new Book("aaddf", "adfaadd", author2);
+        List<Book> booksToSave = bookRepository.saveAll(List.of(book1, book2));
 
+        final List<Book> result = bookRepository.findAll();
 
-        List<Book> booksInTest = new ArrayList<>();
-        booksInTest.add(book1);
-        booksInTest.add(book2);
-
-        assertEquals(booksInTest,booksInRepo);
+        assertEquals(booksToSave, result);
     }
-
 
 }

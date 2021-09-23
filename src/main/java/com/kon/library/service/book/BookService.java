@@ -12,4 +12,6 @@ public interface BookService {
 
     List<BookDto> getAllBooks();
 
+    List<BookDto> getBooksWhereNameContains(String name);
+
 }

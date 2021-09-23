@@ -9,7 +9,7 @@ public interface AuthorService {
 
     Author addAuthor(Author author);
 
-    Author findAuthorByNameAndLastname(String author);
+    Author findAuthorByNameAndLastName(String author);
 
     List<AuthorDto> getAllAuthors();
 

@@ -11,11 +11,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Date;
 
-import static org.mockito.ArgumentMatchers.anyObject;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -29,34 +28,33 @@ public class AuthorServiceTest {
     private AuthorServiceImpl authorService;
 
     @Test
-    void findAuthorByNameAndLastnameTest() {
+    void findAuthorByNameAndLastNameTest() {
 
         Mockito.when(authorRepository.findByNameAndLastName("Konrad", "Jurczyk"))
                 .thenReturn(new Author("Konrad", "Jurczyk", new Date()));
 
-        authorService.findAuthorByNameAndLastname("Konrad Jurczyk");
+        authorService.findAuthorByNameAndLastName("Konrad Jurczyk");
 
         verify(authorRepository, times(1))
                 .findByNameAndLastName("Konrad", "Jurczyk");
     }
 
     @Test
-    void findAuthorByNameAndLastnameTest_onlyName_shouldThrowIllegalArgumentException() {
+    void findAuthorByNameAndLastNameTest_onlyName_shouldThrowIllegalArgumentException() {
         String name = "Konrad";
-        assertThrows(IllegalArgumentException.class, () -> authorService.findAuthorByNameAndLastname(name));
+        assertThrows(IllegalArgumentException.class, () -> authorService.findAuthorByNameAndLastName(name));
     }
 
-    // TODO napisac test w przypadku gdy dostane 3 stringi po spacji i naprawic metode.
-
     @Test
-    void findAuthorByNameAndLastnameTest_name_middleName_lastName_shouldThrowIllegalArgumentException() {
-//        Mockito.when(authorRepository.findByNameAndLastName("Konrad", "Jurczyk"))
-//                .thenReturn(new Author("Konrad", "Jurczyk", new Date()));
-
+    void findAuthorByNameAndLastNameTest_name_middleName_lastName_shouldThrowIllegalArgumentException() {
         String name = "Konrad Jurczyk Celofan";
 
-        assertThrows(IllegalArgumentException.class, () -> authorService.findAuthorByNameAndLastname(name));
-//        verify(authorRepository)
-//                .findByNameAndLastName("Konrad", "Jurczyk");
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> authorService.findAuthorByNameAndLastName(name));
+
+        String expectedMessage = "Author's name not valid";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
     }
 }

@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "BOOK")
@@ -16,11 +17,11 @@ public class Book {
     private Long id;
 
     @NotNull
-    @Column(name = "NAME",nullable = false)
+    @Column(name = "NAME", nullable = false)
     private String name;
 
     @NotNull
-    @Column(name = "DESCRIPTION",nullable = false)
+    @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
     @JsonIgnore
@@ -52,5 +53,29 @@ public class Book {
 
     public Author getAuthor() {
         return author;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id) &&
+                Objects.equals(name, book.name) &&
+                Objects.equals(description, book.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description);
     }
 }

@@ -14,8 +14,6 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-//TODO: PRZYDEKOROWAC KONTROLLERY W RESPONSE ENTITY
-
 @RequestMapping(path = "/author")
 @RestController
 public class AuthorController {
