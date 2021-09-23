@@ -1,14 +1,16 @@
 package com.kon.library.controller;
 
 
+import com.kon.library.controller.dto.AuthorDto;
 import com.kon.library.controller.dto.BookDto;
 import com.kon.library.model.Book;
 import com.kon.library.service.book.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -25,7 +27,16 @@ public class BookController {
     }
 
     @PostMapping(value = "/add", consumes = APPLICATION_JSON_VALUE)
-    public Book addBook(@RequestBody BookDto dto){
-        return bookService.addBook(dto);
+    public BookDto addBook(@RequestBody BookDto dto){
+        bookService.addBook(dto);
+        return dto;
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<BookDto>> getAllBooks() {
+        final var bookList = bookService.getAllBooks();
+
+        return new ResponseEntity<>(bookList, HttpStatus.OK);
     }
 }

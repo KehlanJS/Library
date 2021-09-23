@@ -1,5 +1,6 @@
 package com.kon.library.service.author;
 
+import com.kon.library.controller.dto.AuthorDto;
 import com.kon.library.model.Author;
 
 import java.util.List;
@@ -10,6 +11,6 @@ public interface AuthorService {
 
     Author findAuthorByNameAndLastname(String author);
 
-    List<Author> getAllAuthors();
+    List<AuthorDto> getAllAuthors();
 
 }

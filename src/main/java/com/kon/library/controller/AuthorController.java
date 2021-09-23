@@ -1,6 +1,7 @@
 package com.kon.library.controller;
 
 import com.kon.library.controller.dto.AuthorDto;
+import com.kon.library.controller.dto.AuthorMapper;
 import com.kon.library.model.Author;
 import com.kon.library.service.author.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -18,11 +20,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class AuthorController {
 
-
     AuthorService authorService;
 
     @Autowired
-    public AuthorController(AuthorService authorService){
+    public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
     }
 
@@ -34,7 +35,7 @@ public class AuthorController {
 
     @ResponseBody
     @GetMapping(path = "/all")
-    public ResponseEntity<List<Author>> getAllAuthors(){
+    public ResponseEntity<List<AuthorDto>> getAllAuthors() {
         final var authorList = authorService.getAllAuthors();
 
         return new ResponseEntity<>(authorList, HttpStatus.OK);

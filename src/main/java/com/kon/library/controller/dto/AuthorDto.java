@@ -11,6 +11,9 @@ public class AuthorDto implements Serializable {
     private Date birthDate;
     private Set<BookDto> books;
 
+    public AuthorDto() {
+    }
+
     private AuthorDto(Builder builder) {
         this.name = builder.getName();
         this.lastName = builder.getLastName();
@@ -26,11 +29,15 @@ public class AuthorDto implements Serializable {
         return lastName;
     }
 
-    public Date getBirthDate(){
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public static class Builder{
+    public Set<BookDto> getBooks() {
+        return books;
+    }
+
+    public static class Builder {
         private String name;
         private String lastName;
         private Date birthDate;
@@ -52,27 +59,27 @@ public class AuthorDto implements Serializable {
             return books;
         }
 
-        public Builder name(String name){
+        public Builder name(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder lastName(String lastName){
+        public Builder lastName(String lastName) {
             this.lastName = lastName;
             return this;
         }
 
-        public Builder birthDate(Date date){
+        public Builder birthDate(Date date) {
             this.birthDate = date;
             return this;
         }
 
-        public Builder books(Set<BookDto> books){
+        public Builder books(Set<BookDto> books) {
             this.books = books;
             return this;
         }
 
-        public AuthorDto build(){
+        public AuthorDto build() {
             return new AuthorDto(this);
         }
     }
